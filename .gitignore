@@ -1,0 +1,25 @@
+#virtual Environment
+.venv/
+
+#Environment Variables
+.env
+
+#python
+__pycache__/
+*.py[cod]
+
+#database
+db.sqlite3
+
+#media
+media/
+
+#logs
+.log
+
+#vs code
+.vscode/
+
+#os files
+.DS_Store
+Thumbs.db
