@@ -31,12 +31,26 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #Third-party apps
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'django_filters',
+
+    #local apps
+    'accounts',
+    'menu',
+    'cart',
+    'orders',
+    'reservations',
+    'dashboard'
 ]
 
 MIDDLEWARE = [
@@ -72,10 +86,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'restaurant_db',
+        'USER':'root',
+        'PASSWORD':'Mohan@2000',
+        'HOST':'localhost',
+        'PORT':'3306'
     }
 }
 
