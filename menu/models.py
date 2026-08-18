@@ -23,6 +23,17 @@ class MenuItems(models.Model):
     preparation_time=models.PositiveIntegerField(help_text="Preperation time in minutes")
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
+    class Meta:
+        constraints = [
+        models.CheckConstraint(
+            condition=models.Q(price__gte=0),
+            name="menu_item_price_gte_zero",
+        ),
+        models.CheckConstraint(
+            condition=models.Q(preparation_time__gte=1),
+            name="menu_item_preparation_time_gte_one",
+        ),
+    ]
 
     def __str__(self):
         return self.name
