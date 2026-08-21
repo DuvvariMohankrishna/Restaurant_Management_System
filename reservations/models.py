@@ -3,9 +3,13 @@ from django.contrib.auth.models import User
 
 
 class ReservationStatus(models.TextChoices):
+
     PENDING = "PENDING", "Pending"
+
     CONFIRMED = "CONFIRMED", "Confirmed"
+
     COMPLETED = "COMPLETED", "Completed"
+
     CANCELLED = "CANCELLED", "Cancelled"
 
 
@@ -38,19 +42,6 @@ class Reservation(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
-
-    class Meta:
-
-        constraints = [
-            models.UniqueConstraint(
-                fields=[
-                    "reservation_date",
-                    "reservation_time",
-                    "table_number",
-                ],
-                name="unique_table_reservation",
-            )
-        ]
 
     def __str__(self):
 

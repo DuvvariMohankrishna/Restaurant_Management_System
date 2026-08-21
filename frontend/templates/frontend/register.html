@@ -1,0 +1,15 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+{% block title %}Register | Restaurant Management System{% endblock %}
+{% block content %}
+<section class="container my-5"><div class="row justify-content-center"><div class="col-md-6 col-lg-5"><div class="card shadow-sm"><div class="card-body p-4">
+<h2 class="text-center mb-4">Create Account</h2><div id="register-message"></div>
+<form id="register-form">
+<div class="mb-3"><label for="register-username" class="form-label">Username</label><input type="text" id="register-username" class="form-control" required></div>
+<div class="mb-3"><label for="register-email" class="form-label">Email</label><input type="email" id="register-email" class="form-control" required></div>
+<div class="mb-4"><label for="register-password" class="form-label">Password</label><input type="password" id="register-password" class="form-control" minlength="8" required><div class="form-text">Minimum 8 characters.</div></div>
+<button id="register-submit" type="submit" class="btn btn-warning w-100">Register</button>
+</form><p class="text-center mt-3 mb-0">Already have an account? <a href="{% url 'frontend:login' %}">Login</a></p>
+</div></div></div></div></section>
+{% endblock %}
+{% block scripts %}<script src="{% static 'frontend/js/register.js' %}"></script>{% endblock %}

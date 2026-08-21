@@ -1,0 +1,118 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Cart | Restaurant Management System
+{% endblock %}
+
+
+{% block content %}
+
+<section class="container my-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h1 class="fw-bold">
+            Your Cart
+        </h1>
+
+        <button
+            id="clear-cart-btn"
+            class="btn btn-outline-danger"
+        >
+            Clear Cart
+        </button>
+
+    </div>
+
+
+    <div
+        id="cart-message"
+        class="mb-3"
+    ></div>
+
+
+    <div
+        id="cart-items"
+        class="row g-4"
+    >
+
+        <div class="col-12 text-center">
+
+            <p>
+                Loading your cart...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="cart-summary"
+        class="card shadow-sm mt-5 d-none"
+    >
+
+        <div class="card-body">
+
+            <div
+                class="d-flex justify-content-between align-items-center"
+            >
+
+                <h4 class="mb-0">
+                    Total
+                </h4>
+
+                <h4
+                    id="cart-total"
+                    class="mb-0"
+                >
+                    ₹0.00
+                </h4>
+
+            </div>
+
+            <hr>
+
+            <div
+                class="
+                    d-flex
+                    justify-content-between
+                    align-items-center
+                "
+            >
+
+                <a
+                    href="{% url 'frontend:menu' %}"
+                    class="btn btn-outline-secondary"
+                >
+                    Continue Shopping
+                </a>
+
+
+                <button
+                    id="checkout-btn"
+                    class="btn btn-warning"
+                >
+                    Place Order
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script
+    src="{% static 'frontend/js/cart.js' %}"
+></script>
+
+{% endblock %}

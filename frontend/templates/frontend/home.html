@@ -1,0 +1,141 @@
+{% extends "frontend/base.html" %}
+
+{% block title %}
+    Home | Restaurant Management System
+{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+
+    <div class="container text-center">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <h1 class="display-4 fw-bold">
+
+                    Welcome to Our Restaurant
+
+                </h1>
+
+                <p class="lead mt-3">
+
+                    Order your favorite food, manage
+                    reservations, and enjoy a seamless
+                    dining experience.
+
+                </p>
+
+                <div class="mt-4">
+
+                    <a
+                        href="{% url 'frontend:menu' %}"
+                        class="btn btn-warning btn-lg me-2"
+                    >
+
+                        View Menu
+
+                    </a>
+
+                    <a
+                        href="{% url 'frontend:register' %}"
+                        class="btn btn-outline-light btn-lg"
+                    >
+
+                        Get Started
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="container my-5">
+
+    <div class="row text-center g-4">
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <h3>
+                        🍽️ Order Food
+                    </h3>
+
+                    <p>
+
+                        Browse our menu and order
+                        your favorite dishes.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <h3>
+                        🛒 Easy Cart
+                    </h3>
+
+                    <p>
+
+                        Add items, manage quantities,
+                        and place orders easily.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <h3>
+                        📅 Reservations
+                    </h3>
+
+                    <p>
+
+                        Reserve your table and manage
+                        your reservations online.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

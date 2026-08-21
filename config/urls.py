@@ -72,4 +72,11 @@ urlpatterns = [
         ),
         name="swagger-ui",
     ),
+    path(
+    "",
+    include(
+        ("frontend.urls", "frontend"),
+        namespace="frontend",
+    ),
+),
 ]
