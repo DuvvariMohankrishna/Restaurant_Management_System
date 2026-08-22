@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["python312", "pkg-config", "mariadb", "libmysqlclient", "gcc"]
+nixPkgs = ["python312", "pkg-config", "mariadb-connector-c", "gcc"]
 
 [phases.install]
 cmds = [
