@@ -391,3 +391,16 @@ MCA Graduate and aspiring **Python Backend Developer** focused on building web a
 ---
 
 ⭐ If you found this project interesting, consider giving it a star!
+
+## Menu photos and add-to-cart dialog
+
+The menu page displays each item's uploaded photo from the `MenuItems.image` field. To add or change a photo:
+
+1. Sign in to `/admin/` with a Django staff/superuser account.
+2. Open **Menu items**, then add or edit a menu item.
+3. Upload an image in the **Image** field and save. Use optimized JPG, PNG, or WebP images; square or landscape photos work well.
+4. Open `/menu/` and refresh the page to see the photo on the menu card.
+
+Menu items without a photo use the built-in placeholder at `frontend/static/frontend/img/food-placeholder.svg`. For local development, uploaded media is served from `/media/` while `DEBUG=True`. In production, configure persistent media storage or an object-storage service; local filesystem uploads may not persist across redeployments on some hosts.
+
+Clicking **Add to cart** opens a centered, animated dialog showing the selected item's image, description, unit price, quantity selector (1–20), and calculated total. Confirming the dialog sends the selected quantity to the existing cart API. The dialog uses Bootstrap's modal component and respects the user's reduced-motion preference.

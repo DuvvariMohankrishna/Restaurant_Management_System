@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 
 from .models import Category
 from .models import MenuItems
@@ -23,6 +24,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(MenuItems)
 class MenuItemAdmin(admin.ModelAdmin):
     list_display=("id",
+                  "image_preview",
                   "name",
                   "category",
                   "price",
@@ -34,4 +36,17 @@ class MenuItemAdmin(admin.ModelAdmin):
                    "description",)
     ordering=("name",)
     readonly_fields=("created_at",
-                     "updated_at",)
+                     "updated_at",
+                     "image_preview",)
+
+    fields = ("category", "name", "description", "price", "image", "image_preview",
+              "is_available", "preparation_time", "created_at", "updated_at")
+
+    @admin.display(description="Current image")
+    def image_preview(self, obj):
+        if obj and obj.image:
+            return format_html(
+                '<img src="{}" style="width:100px;height:72px;object-fit:cover;border-radius:8px;" />',
+                obj.image.url,
+            )
+        return "No image uploaded"
