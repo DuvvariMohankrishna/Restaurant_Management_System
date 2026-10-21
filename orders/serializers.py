@@ -34,6 +34,14 @@ class OrderSerializer(serializers.ModelSerializer):
         read_only=True,
     )
 
+    payment_method = serializers.SerializerMethodField()
+
+    def get_payment_method(self, obj):
+        payment = getattr(obj, "payment", None)
+        if payment is not None:
+            return payment.get_payment_method_display()
+        return "Cash"  # Cash is the only supported method in this project.
+
     username = serializers.CharField(
         source="user.username",
         read_only=True,
@@ -51,6 +59,7 @@ class OrderSerializer(serializers.ModelSerializer):
             "created_at",
             "update_at",
             "items",
+            "payment_method",
         ]
 
         read_only_fields = [
