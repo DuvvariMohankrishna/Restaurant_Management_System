@@ -150,6 +150,7 @@ class OrderHistoryAPIView(APIView):
         orders = (
             Order.objects
             .filter(user=request.user)
+            .select_related("payment")
             .prefetch_related("items__menu_item")
             .order_by("-created_at")
         )
