@@ -7,6 +7,8 @@
     <title>{% block title %}Restaurant Management System{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'frontend/css/style.css' %}">
+    <!-- Page-specific CSS -->
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

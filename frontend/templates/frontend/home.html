@@ -1,141 +1,125 @@
 {% extends "frontend/base.html" %}
+{% load static %}
 
-{% block title %}
-    Home | Restaurant Management System
+{% block title %}RestaurantMS | Great Food, Great Company{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'frontend/css/home.css' %}">
 {% endblock %}
 
 {% block content %}
-
-<section class="hero-section">
-
-    <div class="container text-center">
-
-        <div class="row justify-content-center">
-
-            <div class="col-lg-8">
-
-                <h1 class="display-4 fw-bold">
-
-                    Welcome to Our Restaurant
-
-                </h1>
-
-                <p class="lead mt-3">
-
-                    Order your favorite food, manage
-                    reservations, and enjoy a seamless
-                    dining experience.
-
-                </p>
-
-                <div class="mt-4">
-
-                    <a
-                        href="{% url 'frontend:menu' %}"
-                        class="btn btn-warning btn-lg me-2"
-                    >
-
-                        View Menu
-
-                    </a>
-
-                    <a
-                        href="{% url 'frontend:register' %}"
-                        class="btn btn-outline-light btn-lg"
-                    >
-
-                        Get Started
-
-                    </a>
-
-                </div>
-
+<section class="home-hero" aria-labelledby="home-hero-title">
+    <div class="home-hero-shade"></div>
+    <div class="container home-hero-inner">
+        <div class="home-hero-copy">
+            <p class="home-eyebrow">GOOD FOOD <span>•</span> GREAT COMPANY <span>•</span> MEMORABLE MOMENTS</p>
+            <h1 id="home-hero-title">Welcome to Our <span>Restaurant</span></h1>
+            <p class="home-hero-lead">Order your favorite food, manage reservations, and enjoy a seamless dining experience.</p>
+            <div class="home-hero-actions">
+                <a href="{% url 'frontend:menu' %}" class="btn home-btn-primary"><span aria-hidden="true">🍴</span> View Menu <span aria-hidden="true">→</span></a>
+                <a href="{% url 'frontend:reservations' %}" class="btn home-btn-outline"><span aria-hidden="true">▦</span> Book a Table</a>
             </div>
-
         </div>
-
+        <div class="home-hero-caption"><span class="home-caption-dot"></span> A delicious experience awaits</div>
     </div>
-
 </section>
 
-
-<section class="container my-5">
-
-    <div class="row text-center g-4">
-
-        <div class="col-md-4">
-
-            <div class="card h-100 shadow-sm">
-
-                <div class="card-body">
-
-                    <h3>
-                        🍽️ Order Food
-                    </h3>
-
-                    <p>
-
-                        Browse our menu and order
-                        your favorite dishes.
-
-                    </p>
-
-                </div>
-
+<section class="home-features-section" aria-label="Restaurant services">
+    <div class="container">
+        <div class="row g-3 g-lg-4 home-feature-grid">
+            <div class="col-6 col-lg-3">
+                <a href="{% url 'frontend:menu' %}" class="home-feature-card feature-orange">
+                    <span class="home-feature-icon" aria-hidden="true">🍴</span>
+                    <h2>Order Food</h2><p>Browse our menu and order your favorite dishes.</p><span class="home-feature-arrow" aria-hidden="true">→</span>
+                </a>
             </div>
-
-        </div>
-
-
-        <div class="col-md-4">
-
-            <div class="card h-100 shadow-sm">
-
-                <div class="card-body">
-
-                    <h3>
-                        🛒 Easy Cart
-                    </h3>
-
-                    <p>
-
-                        Add items, manage quantities,
-                        and place orders easily.
-
-                    </p>
-
-                </div>
-
+            <div class="col-6 col-lg-3">
+                <a href="{% url 'frontend:cart' %}" class="home-feature-card feature-blue">
+                    <span class="home-feature-icon" aria-hidden="true">🛒</span>
+                    <h2>Easy Cart</h2><p>Add items, manage quantities, and place orders easily.</p><span class="home-feature-arrow" aria-hidden="true">→</span>
+                </a>
             </div>
-
-        </div>
-
-
-        <div class="col-md-4">
-
-            <div class="card h-100 shadow-sm">
-
-                <div class="card-body">
-
-                    <h3>
-                        📅 Reservations
-                    </h3>
-
-                    <p>
-
-                        Reserve your table and manage
-                        your reservations online.
-
-                    </p>
-
-                </div>
-
+            <div class="col-6 col-lg-3">
+                <a href="{% url 'frontend:reservations' %}" class="home-feature-card feature-green">
+                    <span class="home-feature-icon" aria-hidden="true">▦</span>
+                    <h2>Reservations</h2><p>Reserve your table and manage your reservations online.</p><span class="home-feature-arrow" aria-hidden="true">→</span>
+                </a>
             </div>
-
+            <div class="col-6 col-lg-3">
+                <a href="{% url 'frontend:orders' %}" class="home-feature-card feature-purple">
+                    <span class="home-feature-icon" aria-hidden="true">▤</span>
+                    <h2>My Orders</h2><p>Track and view your past orders anytime.</p><span class="home-feature-arrow" aria-hidden="true">→</span>
+                </a>
+            </div>
         </div>
-
     </div>
-
 </section>
 
+<section class="home-about-section">
+    <div class="container">
+        <div class="row align-items-center g-4 g-lg-5">
+            <div class="col-lg-5">
+                <div class="home-about-photo" role="img" aria-label="Warmly lit restaurant dining room with set tables"></div>
+            </div>
+            <div class="col-lg-7">
+                <div class="home-about-copy">
+                    <p class="home-section-eyebrow">ABOUT US</p>
+                    <h2>A Place for Great Food<br class="d-none d-md-block"> and Good Company</h2>
+                    <p class="home-about-description">We are passionate about serving delicious food made from fresh ingredients, creating a warm and welcoming atmosphere for our guests. Whether you are ordering online or dining in, our goal is to give you a memorable experience every time.</p>
+                    <div class="home-stats">
+                        <div class="home-stat"><span class="stat-icon stat-orange" aria-hidden="true">♨</span><div><strong>Fresh</strong><small>Food made with care</small></div></div>
+                        <div class="home-stat"><span class="stat-icon stat-blue" aria-hidden="true">♧</span><div><strong>Friendly</strong><small>Guest-first service</small></div></div>
+                        <div class="home-stat"><span class="stat-icon stat-gold" aria-hidden="true">★</span><div><strong>Quality</strong><small>Every single visit</small></div></div>
+                        <div class="home-stat"><span class="stat-icon stat-red" aria-hidden="true">♥</span><div><strong>Made with care</strong><small>From kitchen to table</small></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="home-reviews-section" aria-labelledby="home-reviews-title">
+    <div class="container">
+        <div class="home-reviews-heading text-center">
+            <p class="home-section-eyebrow">CUSTOMER REVIEWS</p>
+            <h2 id="home-reviews-title">What Our Customers Say</h2>
+            <p>Great food is even better when shared with others.</p>
+        </div>
+        <div class="row g-3 g-lg-4 home-review-grid">
+            <div class="col-md-4">
+                <article class="home-review-card">
+                    <div class="home-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <blockquote>“Amazing food and great service! The online ordering is so convenient.”</blockquote>
+                    <div class="home-review-author"><span class="review-avatar avatar-one">R</span><div><strong>Restaurant guest</strong><small>Food and service</small></div></div>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="home-review-card">
+                    <div class="home-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <blockquote>“Delicious dishes and a welcoming atmosphere. A lovely place to enjoy a meal.”</blockquote>
+                    <div class="home-review-author"><span class="review-avatar avatar-two">G</span><div><strong>Restaurant guest</strong><small>Dining experience</small></div></div>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="home-review-card">
+                    <div class="home-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <blockquote>“The reservation process is simple, and the menu has something for everyone.”</blockquote>
+                    <div class="home-review-author"><span class="review-avatar avatar-three">C</span><div><strong>Restaurant guest</strong><small>Online experience</small></div></div>
+                </article>
+            </div>
+        </div>
+        <p class="home-review-note">Sample testimonials for layout preview — replace these with verified customer reviews before publishing.</p>
+    </div>
+</section>
+
+<section class="home-promises-strip" aria-label="Our promises">
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-6 col-lg-3"><div class="home-promise"><span class="promise-green" aria-hidden="true">✿</span><div><strong>Fresh Ingredients</strong><small>Carefully selected produce</small></div></div></div>
+            <div class="col-6 col-lg-3"><div class="home-promise"><span class="promise-blue" aria-hidden="true">↗</span><div><strong>Friendly Service</strong><small>Here to make your day</small></div></div></div>
+            <div class="col-6 col-lg-3"><div class="home-promise"><span class="promise-green" aria-hidden="true">◇</span><div><strong>Hygienic Preparation</strong><small>Clean and safe kitchen</small></div></div></div>
+            <div class="col-6 col-lg-3"><div class="home-promise"><span class="promise-red" aria-hidden="true">♡</span><div><strong>Great Taste</strong><small>Made to be enjoyed</small></div></div></div>
+        </div>
+    </div>
+</section>
 {% endblock %}
