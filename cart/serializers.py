@@ -41,15 +41,36 @@ class CartItemSerializer(serializers.ModelSerializer):
 
     subtotal = serializers.ReadOnlyField()
 
+    image_url = serializers.SerializerMethodField()
+    item_name = serializers.CharField(
+        source="menu_item.name",
+        read_only=True,
+    )
+
     class Meta:
         model = CartItem
         fields = (
             "id",
             "menu_item",
+            "item_name",
             "price",
             "quantity",
             "subtotal",
+            "image_url",
         )
+
+    def get_image_url(self, obj):
+        image = obj.menu_item.image
+        if not image:
+            return None
+
+        request = self.context.get("request")
+        try:
+            url = image.url
+        except (ValueError, OSError):
+            return None
+
+        return request.build_absolute_uri(url) if request else url
 
 
 # Used for GET /cart/

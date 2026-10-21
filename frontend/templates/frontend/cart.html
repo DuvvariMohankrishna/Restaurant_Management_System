@@ -1,118 +1,116 @@
 {% extends "frontend/base.html" %}
 {% load static %}
 
-
-{% block title %}
-    Cart | Restaurant Management System
-{% endblock %}
-
+{% block title %}Your Cart | Restaurant Management System{% endblock %}
 
 {% block content %}
-
-<section class="container my-5">
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
-
-        <h1 class="fw-bold">
-            Your Cart
-        </h1>
-
-        <button
-            id="clear-cart-btn"
-            class="btn btn-outline-danger"
-        >
+<section class="container cart-page my-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <p class="cart-eyebrow mb-2">YOUR ORDER, YOUR WAY</p>
+            <h1 class="cart-page-title fw-bold mb-0">Your Cart</h1>
+            <p class="text-muted mb-0 mt-2">Review your favourites before placing your order.</p>
+        </div>
+        <button id="clear-cart-btn" class="btn btn-outline-danger cart-clear-btn" type="button">
             Clear Cart
         </button>
-
     </div>
 
+    <div id="cart-message" class="mb-3" aria-live="polite"></div>
 
-    <div
-        id="cart-message"
-        class="mb-3"
-    ></div>
-
-
-    <div
-        id="cart-items"
-        class="row g-4"
-    >
-
-        <div class="col-12 text-center">
-
-            <p>
-                Loading your cart...
-            </p>
-
-        </div>
-
+    <div id="cart-items" class="cart-items-list">
+        <div class="cart-loading"><span class="spinner-border spinner-border-sm me-2" role="status"></span>Loading your cart...</div>
     </div>
 
-
-    <div
-        id="cart-summary"
-        class="card shadow-sm mt-5 d-none"
-    >
-
-        <div class="card-body">
-
-            <div
-                class="d-flex justify-content-between align-items-center"
-            >
-
-                <h4 class="mb-0">
-                    Total
-                </h4>
-
-                <h4
-                    id="cart-total"
-                    class="mb-0"
-                >
-                    ₹0.00
-                </h4>
-
+    <section id="cart-summary" class="card cart-summary-card mt-4 d-none" aria-label="Cart summary">
+        <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center gap-3">
+                <div>
+                    <p class="cart-summary-label mb-1">ORDER TOTAL</p>
+                    <h2 class="mb-0 cart-total-value" id="cart-total">₹0.00</h2>
+                </div>
+                <span class="cart-summary-icon" aria-hidden="true">🛍️</span>
             </div>
-
             <hr>
-
-            <div
-                class="
-                    d-flex
-                    justify-content-between
-                    align-items-center
-                "
-            >
-
-                <a
-                    href="{% url 'frontend:menu' %}"
-                    class="btn btn-outline-secondary"
-                >
-                    Continue Shopping
-                </a>
-
-
-                <button
-                    id="checkout-btn"
-                    class="btn btn-warning"
-                >
-                    Place Order
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                <a href="{% url 'frontend:menu' %}" class="btn btn-outline-secondary cart-secondary-btn">Continue Shopping</a>
+                <button id="checkout-btn" class="btn btn-warning cart-place-order-btn" type="button">
+                    Place Order <span aria-hidden="true">→</span>
                 </button>
-
             </div>
-
         </div>
-
-    </div>
-
+    </section>
 </section>
 
+<!-- Centered item-removal / status dialog -->
+<div class="modal fade cart-modal" id="cartNoticeModal" tabindex="-1" aria-labelledby="cartNoticeTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4 p-md-5">
+                <div class="cart-modal-symbol" id="cartNoticeSymbol" aria-hidden="true">✓</div>
+                <h2 class="h4 fw-bold mb-2" id="cartNoticeTitle">Cart updated</h2>
+                <p class="text-muted mb-4" id="cartNoticeText">Your cart has been updated.</p>
+                <button type="button" class="btn btn-warning cart-modal-primary" data-bs-dismiss="modal">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Checkout confirmation dialog -->
+<div class="modal fade cart-modal checkout-modal" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header border-0 px-4 px-md-5 pt-4 pt-md-5">
+                <div>
+                    <p class="cart-eyebrow mb-2">ONE LAST CHECK</p>
+                    <h2 class="modal-title h3 fw-bold" id="checkoutModalTitle">Review your order</h2>
+                    <p class="text-muted mb-0 mt-2">Check your items and choose a payment method.</p>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-4 px-md-5 pb-4">
+                <div id="checkout-items" class="checkout-items-list"></div>
+                <div class="checkout-total-row mt-3">
+                    <span>Total amount</span>
+                    <strong id="checkout-total">₹0.00</strong>
+                </div>
+
+                <fieldset class="payment-choice mt-4">
+                    <legend class="h6 fw-bold mb-3">Payment method</legend>
+                    <label class="payment-option payment-option-selected" for="payment-cash">
+                        <input class="form-check-input" type="radio" name="payment-method" id="payment-cash" value="CASH" checked>
+                        <span class="payment-option-icon" aria-hidden="true">💵</span>
+                        <span class="flex-grow-1">
+                            <strong class="d-block">Cash</strong>
+                            <small class="text-muted">Pay in cash when your order is delivered/served.</small>
+                        </span>
+                        <span class="payment-option-check" aria-hidden="true">✓</span>
+                    </label>
+                    <label class="payment-option payment-option-disabled" for="payment-online" aria-disabled="true">
+                        <input class="form-check-input" type="radio" name="payment-method" id="payment-online" value="ONLINE" disabled>
+                        <span class="payment-option-icon" aria-hidden="true">💳</span>
+                        <span class="flex-grow-1">
+                            <strong class="d-block">Online payment</strong>
+                            <small class="text-muted">Currently unavailable</small>
+                        </span>
+                        <span class="payment-coming-soon">Coming soon</span>
+                    </label>
+                    <p class="small text-muted mt-2 mb-0">Online payment is disabled until a payment gateway is configured.</p>
+                </fieldset>
+                <div id="checkout-error" class="alert alert-danger d-none mt-3 mb-0" role="alert"></div>
+            </div>
+            <div class="modal-footer border-0 px-4 px-md-5 pb-4 pb-md-5 pt-0">
+                <button type="button" class="btn btn-outline-secondary cart-secondary-btn" data-bs-dismiss="modal">Back to Cart</button>
+                <button type="button" id="confirm-order-btn" class="btn btn-warning cart-place-order-btn">
+                    <span id="confirm-order-label">Confirm Order</span>
+                    <span aria-hidden="true">→</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
-
 {% block scripts %}
-
-<script
-    src="{% static 'frontend/js/cart.js' %}"
-></script>
-
+<script src="{% static 'frontend/js/cart.js' %}"></script>
 {% endblock %}

@@ -6,6 +6,17 @@ document.addEventListener(
 
 async function loadOrders() {
 
+    const orderNotice = sessionStorage.getItem("order_notice");
+    if (orderNotice) {
+        sessionStorage.removeItem("order_notice");
+        const notice = document.createElement("div");
+        notice.className = "alert alert-success container mt-4";
+        notice.setAttribute("role", "status");
+        notice.textContent = orderNotice;
+        const main = document.querySelector("main");
+        if (main) main.prepend(notice);
+    }
+
     const loadingElement =
         document.getElementById(
             "orders-loading"
