@@ -68,6 +68,8 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_spectacular",
     "corsheaders",
+    # Cloudinary
+    "cloudinary_storage","cloudinary",
 
     # Local apps
     "accounts",
@@ -241,9 +243,18 @@ STATIC_URL = "static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+if os.environ.get("USE_CLOUDINARY", "False").lower() == "true":
+    DEFAULT_STORAGE_BACKEND = (
+        "cloudinary_storage.storage.MediaCloudinaryStorage"
+    )
+else:
+    DEFAULT_STORAGE_BACKEND = (
+        "django.core.files.storage.FileSystemStorage"
+    )
+
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": DEFAULT_STORAGE_BACKEND,
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
@@ -257,6 +268,12 @@ STORAGES = {
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
+    "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
+}
 
 # ============================================================
 # DJANGO REST FRAMEWORK
