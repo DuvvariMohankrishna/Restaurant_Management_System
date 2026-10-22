@@ -69,7 +69,8 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "corsheaders",
     # Cloudinary
-    "cloudinary_storage","cloudinary",
+    "cloudinary_storage",
+    "cloudinary",
 
     # Local apps
     "accounts",
@@ -274,6 +275,7 @@ CLOUDINARY_STORAGE = {
     "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
     "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
 }
+ 
 
 # ============================================================
 # DJANGO REST FRAMEWORK
