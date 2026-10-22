@@ -179,6 +179,11 @@ DATABASES = {
             "DB_PORT",
             "3306",
         ),
+        "OPTIONS": {
+            "ssl": {
+                "ca": str(BASE_DIR / "certificates" / "ca.pem"),
+            },
+        },
     }
 }
 
