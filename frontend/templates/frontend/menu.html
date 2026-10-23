@@ -1,3 +1,4 @@
+
 {% extends "frontend/base.html" %}
 {% load static %}
 
@@ -6,76 +7,163 @@
 {% block content %}
 <section class="menu-page py-5">
     <div class="container">
+
+        <!-- Menu heading -->
         <div class="menu-heading text-center mb-5">
-            <span class="menu-eyebrow">FRESHLY PREPARED · MADE WITH CARE</span>
-            <h1 class="display-5 fw-bold mt-2">Explore our menu</h1>
-            <p class="lead text-muted mb-0">Find your favourite, choose your portion, and we’ll take care of the rest.</p>
+            <span class="menu-eyebrow">
+                FRESHLY PREPARED · MADE WITH CARE
+            </span>
+
+            <h1 class="display-5 fw-bold mt-2">
+                Explore our menu
+            </h1>
+
+            <p class="lead text-muted mb-0">
+                Find your favourite, choose your portion, and we’ll take care of the rest.
+            </p>
         </div>
 
+        <!-- Menu items: keep only ONE menu-container -->
         <div id="menu-container" class="row g-4" aria-live="polite">
             <div class="col-12 text-center py-5">
-                <div class="spinner-border text-warning" role="status"><span class="visually-hidden">Loading...</span></div>
+                <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+
                 <p class="mt-3 text-muted">Preparing the menu…</p>
             </div>
         </div>
-        <div id="menu-container" class="row g-4" aria-live="polite">
-    <div class="col-12 text-center py-5">
-        <div class="spinner-border text-warning" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <p class="mt-3 text-muted">Preparing the menu…</p>
-    </div>
-</div>
 
-<!-- Menu pagination -->
-<nav id="menu-pagination"
-     class="menu-pagination mt-5"
-     aria-label="Menu pages"
-     hidden>
-</nav>
+        <!-- Menu pagination -->
+        <nav
+            id="menu-pagination"
+            class="menu-pagination mt-5"
+            aria-label="Menu pages"
+            hidden>
+        </nav>
+
     </div>
 </section>
 
 <!-- Add-to-cart item dialog -->
-<div class="modal fade food-modal" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+<div
+    class="modal fade food-modal"
+    id="addToCartModal"
+    tabindex="-1"
+    aria-labelledby="addToCartModalLabel"
+    aria-hidden="true">
+
     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content">
-            <button type="button" class="food-modal-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+
+            <button
+                type="button"
+                class="food-modal-close"
+                data-bs-dismiss="modal"
+                aria-label="Close">
+                &times;
+            </button>
+
             <div class="row g-0">
+
+                <!-- Food image -->
                 <div class="col-md-5 food-modal-image-wrap">
-                    <img id="modal-food-image" class="food-modal-image" src="{% static 'frontend/img/food-placeholder.svg' %}" alt="Selected food item">
+                    <img
+                        id="modal-food-image"
+                        class="food-modal-image"
+                        src="{% static 'frontend/img/food-placeholder.svg' %}"
+                        alt="Selected food item">
+
                     <span class="food-image-tag">MADE FRESH</span>
                 </div>
+
+                <!-- Item details -->
                 <div class="col-md-7">
                     <div class="modal-body p-4 p-lg-5">
+
                         <span class="menu-eyebrow">GOOD CHOICE</span>
-                        <h2 class="modal-title fw-bold mt-2 mb-2" id="addToCartModalLabel">Choose your portion</h2>
-                        <p id="modal-food-description" class="text-muted mb-4">Freshly prepared and ready to order.</p>
+
+                        <h2
+                            class="modal-title fw-bold mt-2 mb-2"
+                            id="addToCartModalLabel">
+                            Choose your portion
+                        </h2>
+
+                        <p
+                            id="modal-food-description"
+                            class="text-muted mb-4">
+                            Freshly prepared and ready to order.
+                        </p>
+
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <span class="text-muted small">PRICE PER ITEM</span>
-                            <strong id="modal-food-price" class="modal-food-price">₹0.00</strong>
+                            <strong id="modal-food-price" class="modal-food-price">
+                                ₹0.00
+                            </strong>
                         </div>
+
+                        <!-- Quantity selector -->
                         <div class="quantity-panel mb-4">
                             <div>
                                 <div class="fw-semibold">Quantity</div>
-                                <div class="small text-muted">How many would you like?</div>
+                                <div class="small text-muted">
+                                    How many would you like?
+                                </div>
                             </div>
+
                             <div class="quantity-control" aria-label="Select quantity">
-                                <button type="button" id="quantity-decrease" class="quantity-btn" aria-label="Decrease quantity">−</button>
-                                <output id="selected-quantity" class="quantity-value" aria-live="polite">1</output>
-                                <button type="button" id="quantity-increase" class="quantity-btn" aria-label="Increase quantity">+</button>
+                                <button
+                                    type="button"
+                                    id="quantity-decrease"
+                                    class="quantity-btn"
+                                    aria-label="Decrease quantity">
+                                    −
+                                </button>
+
+                                <output
+                                    id="selected-quantity"
+                                    class="quantity-value"
+                                    aria-live="polite">
+                                    1
+                                </output>
+
+                                <button
+                                    type="button"
+                                    id="quantity-increase"
+                                    class="quantity-btn"
+                                    aria-label="Increase quantity">
+                                    +
+                                </button>
                             </div>
                         </div>
+
+                        <!-- Total -->
                         <div class="modal-total-row mb-4">
                             <span>Total</span>
                             <strong id="modal-food-total">₹0.00</strong>
                         </div>
-                        <button type="button" id="confirm-add-to-cart" class="btn btn-warning modal-add-button w-100">
+
+                        <!-- Add to cart -->
+                        <button
+                            type="button"
+                            id="confirm-add-to-cart"
+                            class="btn btn-warning modal-add-button w-100">
+
                             <span class="button-label">Add to cart</span>
                             <span aria-hidden="true">→</span>
                         </button>
-                        <p class="small text-muted text-center mt-3 mb-0">You can review your order in the cart before checkout.</p>
-                        <div id="modal-cart-message" class="small mt-3" role="status" aria-live="polite"></div>
+
+                        <p class="small text-muted text-center mt-3 mb-0">
+                            You can review your order in the cart before checkout.
+                        </p>
+
+                        <div
+                            id="modal-cart-message"
+                            class="small mt-3"
+                            role="status"
+                            aria-live="polite">
+                        </div>
+
                     </div>
                 </div>
             </div>
