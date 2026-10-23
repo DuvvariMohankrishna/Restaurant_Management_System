@@ -702,3 +702,38 @@ body {
         padding: 14px;
     }
 }
+
+
+/* Menu pagination */
+.menu-pagination {
+    padding-bottom: 1rem;
+}
+
+.menu-pagination .page-link {
+    min-width: 42px;
+    padding: 10px 14px;
+    border: 1px solid var(--restaurant-border);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--restaurant-ink);
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.menu-pagination .page-link:hover:not(:disabled) {
+    background: #fff1cc;
+    border-color: var(--restaurant-accent);
+    color: var(--restaurant-ink);
+}
+
+.menu-pagination .page-item.active .page-link {
+    background: var(--restaurant-accent);
+    border-color: var(--restaurant-accent);
+    color: var(--restaurant-ink);
+}
+
+.menu-pagination .page-item.disabled .page-link {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
